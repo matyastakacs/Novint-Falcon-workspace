@@ -24,6 +24,7 @@ public:
     StamperKinematicImpl::Angle angles;
     gmtl::Vec3d pos;
     gmtl::Vec3d th;
+    gmtl::Vec3d prev_pos;
     QString readLine;
     std::string line;
     std::string p0;
@@ -39,6 +40,7 @@ public:
     QString ts1;
     QString ts2;
     QString sep = ";";
+    bool isNaN(double th1, double th2, double th3);
 };
 }
 #endif // WORKSPACE_H

@@ -18,12 +18,15 @@ void libnifalcon::WorkSpace::getWorkSpace()
     results.open(QFile::ReadWrite);
 int loopCount = 0;
 bool elozoNaN=false;
-bool marTalalt=false;
-    for(int x = 0; x < 2500; x++)
-    {marTalalt=false;
-        for(int y = 0; y < 150; y++)
+bool elsoTalalatMegvolt=false;
+bool ujsor=false;
+bool isNan=true;
+    for(int x = 0; x < 1; x++)
+    {
+
+        for(int y = 0; y < 1; y++)
         {
-            marTalalt=false;
+
             for(int z = 0; z < 150; z++)
             {
             pos[0] = -0.5 + 0.001 * x;
@@ -35,65 +38,24 @@ bool marTalalt=false;
             th[2] = angles.theta1[2];
             loopCount++;
 
-
-            if(th[0] != th[0] || th[1] != th[1] || th[2] != th[2])
-            {
-            qDebug()<< loopCount;
-            break;
+            if(th[0] == th[0] && th[1] == th[1] && th[2] == th[2] && elsoTalalatMegvolt==false){
+                elsoTalalatMegvolt=true;
+                log << pos[0] << " " << pos[1] << " " << pos[2] <<std::endl;
             }
-            else
-            {
-                if(marTalalt)
-                    {continue;}
 
-                else
-            {log << pos[0] << " " << pos[1] << " " << pos[2] <<std::endl;}
-                    //<< " " << th[0] << " " << th[1] << " " << th[2] << std::endl;
+            if(th[0] != th[0] || th[1] != th[1] || th[2] != th[2] && elsoTalalatMegvolt==true){
+                log << prev_pos[0] << " " << prev_pos[1] << " " << prev_pos[2] <<std::endl;
+                elsoTalalatMegvolt=false;
+                break;}
 
-            }
-            //out << pos[0] << ";" << pos[1] << ";" << pos[2] << ";" << th[0] << ";" << th[1] << ";" << th[2] << endl;
-            //readLine = out.readLine(0);
-            //res << readLine << endl;
-            //std::cout << readLine.toStdString() << std::endl;
+            prev_pos = pos;
             }
         }
+
+
     }
     log.close();
-    open.open("./log.dat");
-    /*for(int i = 0; i < 3375000; i++)
-    {
-        open >> p0 >> p1 >> p2 >> t0 >> t1 >> t2;
-        ps0 = QString::fromStdString(p0);
-        ps1 = QString::fromStdString(p1);
-        ps2 = QString::fromStdString(p2);
-        ts0 = QString::fromStdString(t0);
-        ts1 = QString::fromStdString(t1);
-        ts2 = QString::fromStdString(t2);
-        if(t0 == "-nan(ind)")
-        {}
-        else
-        {
-            if(t1 == "-nan(ind)")
-            {}
-            else
-            {
-                if(t2 == "-nan(ind)")
-                {}
-                else
-                {
-                res << ps0 << sep << ps1 << sep << ps2 << sep << ts0 << sep << ts1 << sep << ts2 << endl;
-                }
-            }
-        }
-
-
-    }*/
-    std::cout << "Operation done." << std::endl;
-    log.close();
-    //copy.close();
-    /*workSpaceLog.flush();
-    results.flush();
-    results.close();
-    workSpaceLog.close();*/
-
+    qDebug() << loopCount;
+    qDebug() << "KÉSZ";
 }
+
