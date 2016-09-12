@@ -21,13 +21,13 @@ bool elozoNaN=false;
 bool elsoTalalatMegvolt=false;
 bool ujsor=false;
 bool isNan=true;
-    for(int x = 0; x < 1; x++)
+    for(int x = 0; x < 1000; x++)
     {
 
-        for(int y = 0; y < 1; y++)
+        for(int y = 0; y < 100; y++)
         {
 
-            for(int z = 0; z < 150; z++)
+            for(int z = 0; z < 1500; z++)
             {
             pos[0] = -0.5 + 0.001 * x;
             pos[1] = 0 + 0.001 * y;
@@ -41,10 +41,12 @@ bool isNan=true;
             if(th[0] == th[0] && th[1] == th[1] && th[2] == th[2] && elsoTalalatMegvolt==false){
                 elsoTalalatMegvolt=true;
                 log << pos[0] << " " << pos[1] << " " << pos[2] <<std::endl;
+               // qDebug() << "Első találat a sorban pipa!";
             }
 
-            if(th[0] != th[0] || th[1] != th[1] || th[2] != th[2] && elsoTalalatMegvolt==true){
+            if((th[0] != th[0] || th[1] != th[1] || th[2] != th[2]) && elsoTalalatMegvolt==true){
                 log << prev_pos[0] << " " << prev_pos[1] << " " << prev_pos[2] <<std::endl;
+               // qDebug() << "Köv ciklus!";
                 elsoTalalatMegvolt=false;
                 break;}
 
