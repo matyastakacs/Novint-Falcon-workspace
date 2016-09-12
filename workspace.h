@@ -10,6 +10,7 @@
 #include <sstream>
 #include <string>
 #include <Windows.h>
+#include <QDebug>
 
 namespace libnifalcon
 {

@@ -16,27 +16,41 @@ void libnifalcon::WorkSpace::getWorkSpace()
     QTextStream out(&workSpaceLog);
     QTextStream res(&results);
     results.open(QFile::ReadWrite);
-
-    for(int i = 0; i < 15; i++)
-    {
-        for(int j = 0; j < 15; j++)
+int loopCount = 0;
+bool elozoNaN=false;
+bool marTalalt=false;
+    for(int x = 0; x < 2500; x++)
+    {marTalalt=false;
+        for(int y = 0; y < 150; y++)
         {
-            for(int k = 0; k < 15; k++)
+            marTalalt=false;
+            for(int z = 0; z < 150; z++)
             {
-            pos[0] = -0.075 + 0.001 * i;
-            pos[1] = -0.075 + 0.001 * j;
-            pos[2] = 0.06 + 0.001 * k;
+            pos[0] = -0.5 + 0.001 * x;
+            pos[1] = 0 + 0.001 * y;
+            pos[2] = 0.12 + 0.001 * z;
             stamper.IK(angles,pos);
             th[0] = angles.theta1[0];
             th[1] = angles.theta1[1];
             th[2] = angles.theta1[2];
+            loopCount++;
+
 
             if(th[0] != th[0] || th[1] != th[1] || th[2] != th[2])
             {
+            qDebug()<< loopCount;
             break;
             }
+            else
+            {
+                if(marTalalt)
+                    {continue;}
 
-            log << pos[0] << " " << pos[1] << " " << pos[2] << " " << th[0] << " " << th[1] << " " << th[2] << std::endl;
+                else
+            {log << pos[0] << " " << pos[1] << " " << pos[2] <<std::endl;}
+                    //<< " " << th[0] << " " << th[1] << " " << th[2] << std::endl;
+
+            }
             //out << pos[0] << ";" << pos[1] << ";" << pos[2] << ";" << th[0] << ";" << th[1] << ";" << th[2] << endl;
             //readLine = out.readLine(0);
             //res << readLine << endl;
@@ -46,7 +60,7 @@ void libnifalcon::WorkSpace::getWorkSpace()
     }
     log.close();
     open.open("./log.dat");
-    for(int i = 0; i < 3375000; i++)
+    /*for(int i = 0; i < 3375000; i++)
     {
         open >> p0 >> p1 >> p2 >> t0 >> t1 >> t2;
         ps0 = QString::fromStdString(p0);
@@ -73,7 +87,7 @@ void libnifalcon::WorkSpace::getWorkSpace()
         }
 
 
-    }
+    }*/
     std::cout << "Operation done." << std::endl;
     log.close();
     //copy.close();
