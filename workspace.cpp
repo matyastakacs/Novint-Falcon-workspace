@@ -17,11 +17,11 @@ void libnifalcon::WorkSpace::getWorkSpace()
     QTextStream res(&results);
     results.open(QFile::ReadWrite);
 
-    for(int i = 0; i < 150; i++)
+    for(int i = 0; i < 15; i++)
     {
-        for(int j = 0; j < 150; j++)
+        for(int j = 0; j < 15; j++)
         {
-            for(int k = 0; k < 150; k++)
+            for(int k = 0; k < 15; k++)
             {
             pos[0] = -0.075 + 0.001 * i;
             pos[1] = -0.075 + 0.001 * j;
@@ -30,6 +30,12 @@ void libnifalcon::WorkSpace::getWorkSpace()
             th[0] = angles.theta1[0];
             th[1] = angles.theta1[1];
             th[2] = angles.theta1[2];
+
+            if(th[0] != th[0] || th[1] != th[1] || th[2] != th[2])
+            {
+            break;
+            }
+
             log << pos[0] << " " << pos[1] << " " << pos[2] << " " << th[0] << " " << th[1] << " " << th[2] << std::endl;
             //out << pos[0] << ";" << pos[1] << ";" << pos[2] << ";" << th[0] << ";" << th[1] << ";" << th[2] << endl;
             //readLine = out.readLine(0);
